@@ -12,7 +12,12 @@
       "Bash(npx shadcn@latest init:*)",
       "Bash(npm install:*)",
       "Bash(npx shadcn@latest add button input form card badge dialog alert toast progress dropdown-menu tabs label -y)",
-      "Bash(npx shadcn@latest add button input form card badge dialog alert sonner progress dropdown-menu tabs label -y)"
+      "Bash(npx shadcn@latest add button input form card badge dialog alert sonner progress dropdown-menu tabs label -y)",
+      "Bash(git remote add:*)",
+      "Bash(git push:*)",
+      "Bash(find:*)",
+      "Bash(ls:*)",
+      "Bash(npm run build:*)"
     ]
   }
 }
