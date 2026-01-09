@@ -26,7 +26,13 @@ app = FastAPI(
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Configure properly in production
+    allow_origins=[
+        "http://localhost:3000",  # Next.js dev server
+        "http://localhost:8000",  # Backend itself
+        "http://127.0.0.1:3000",
+        "http://127.0.0.1:8000",
+        # Add production URLs here when deploying
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
