@@ -1,0 +1,52 @@
+# Python
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+
+# Virtual environment
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment
+.env
+.env.local
+
+# Database
+*.db
+*.sqlite
+
+# Git
+.git
+.gitignore
+
+# Documentation
+README.md
+QUICKSTART.md
+CLAUDE_temp.md
+
+# Tests
+tests/
+.pytest_cache/
+.coverage
+
+# Logs
+*.log
+logs/
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Misc
+.DS_Store
