@@ -17,7 +17,13 @@
       "Bash(git push:*)",
       "Bash(find:*)",
       "Bash(ls:*)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(npx tsc --noEmit)",
+      "Bash(Get-ChildItem -Path \"D:\\\\github\\\\Nestla\\\\app\" -Recurse -Force)",
+      "Bash(Select-Object FullName, Name, Mode)",
+      "Bash(Format-Table -AutoSize)",
+      "Bash(cat:*)",
+      "Bash(wc:*)"
     ]
   }
 }
