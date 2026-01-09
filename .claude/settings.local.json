@@ -6,7 +6,13 @@
       "Bash(ls -la \"D:\\\\github\\\\Nestla\\\\app\"\" 2>&1 || ls -la \"D:githubNestla\"\")",
       "Bash(npx create-next-app@latest frontend --typescript --tailwind --app --no-src-dir --import-alias \"@/*\" --eslint)",
       "Bash(git init:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(npx create-next-app:*)",
+      "Bash(npx shadcn@latest init:*)",
+      "Bash(npm install:*)",
+      "Bash(npx shadcn@latest add button input form card badge dialog alert toast progress dropdown-menu tabs label -y)",
+      "Bash(npx shadcn@latest add button input form card badge dialog alert sonner progress dropdown-menu tabs label -y)"
     ]
   }
 }
