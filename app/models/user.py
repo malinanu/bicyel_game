@@ -16,5 +16,6 @@ class User(Base):
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
 
     # Relationships
-    entries = relationship("Entry", back_populates="user", cascade="all, delete-orphan")
+    entries = relationship("Entry", back_populates="user", cascade="all, delete-orphan", foreign_keys="[Entry.user_id]")
+    reviewed_entries = relationship("Entry", back_populates="reviewer", foreign_keys="[Entry.reviewed_by]")
     winners = relationship("Winner", back_populates="user")

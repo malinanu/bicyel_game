@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 from app.database import get_db
 from app.services.auth_service import AuthService
 from app.models.user import User
+from app.config import settings
 
 security = HTTPBearer()
 
@@ -31,3 +32,19 @@ async def get_current_user(
         )
 
     return user
+
+async def get_admin_user(
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+) -> User:
+    """Verify user has admin privileges"""
+    # Admin phone numbers from config
+    ADMIN_PHONE_NUMBERS = [settings.ADMIN_PHONE_NUMBER]
+
+    if current_user.phone_number not in ADMIN_PHONE_NUMBERS:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Admin access required"
+        )
+
+    return current_user

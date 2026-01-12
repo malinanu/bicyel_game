@@ -15,6 +15,7 @@ class UserResponse(UserBase):
     last_login_at: Optional[datetime]
     is_active: bool
     created_at: datetime
+    entry_count: int = 0
 
     class Config:
         from_attributes = True

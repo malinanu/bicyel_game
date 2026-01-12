@@ -21,3 +21,20 @@ export interface DuplicateCheckResponse {
   message: string;
   existing_entry_id?: number;
 }
+
+export interface EntryListResponse {
+  success: boolean;
+  entries: Entry[];
+  total_entries: number;
+  entries_remaining: number;
+}
+
+export interface CodeValidateRequest {
+  code: string;
+}
+
+export interface CodeValidateResponse {
+  success: boolean;
+  message: string;
+  code_id: number | null;
+}

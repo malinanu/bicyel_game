@@ -7,6 +7,7 @@ from app.services.service_factory import get_otp_service
 from app.services.auth_service import AuthService
 from app.utils.dependencies import get_current_user
 from app.models.user import User
+from app.models.entry import Entry
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
 
@@ -56,12 +57,19 @@ async def verify_otp(
     # Create access token
     access_token = auth_service.create_access_token(user.id)
 
+    # Count user's entries
+    entry_count = db.query(Entry).filter(Entry.user_id == user.id).count()
+
+    # Create user response with entry_count
+    user_response = UserResponse.from_orm(user)
+    user_response.entry_count = entry_count
+
     return {
         "success": True,
         "message": "Login successful",
         "access_token": access_token,
         "token_type": "bearer",
-        "user": UserResponse.from_orm(user)
+        "user": user_response
     }
 
 @router.post("/logout")
@@ -73,6 +81,16 @@ async def logout(current_user: User = Depends(get_current_user)):
     }
 
 @router.get("/me", response_model=UserResponse)
-async def get_current_user_info(current_user: User = Depends(get_current_user)):
+async def get_current_user_info(
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
     """Get current user information"""
-    return current_user
+    # Count user's entries
+    entry_count = db.query(Entry).filter(Entry.user_id == current_user.id).count()
+
+    # Create response with entry_count
+    user_data = UserResponse.from_orm(current_user)
+    user_data.entry_count = entry_count
+
+    return user_data

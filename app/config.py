@@ -41,6 +41,14 @@ class Settings(BaseSettings):
     MAX_IMAGE_SIZE_MB: int = 5
     TOTAL_BICYCLES: int = 1000
 
+    # Fraud Detection
+    FRAUD_SIMILARITY_THRESHOLD: int = 10
+    FRAUD_HIGH_RISK_THRESHOLD: float = 0.75
+    FRAUD_AUTO_REJECT_THRESHOLD: float = 0.95
+    FRAUD_COMPARISON_LIMIT: int = 1000
+    FRAUD_MAX_SUBMISSIONS_PER_HOUR: int = 3
+    ADMIN_PHONE_NUMBER: str = "0771234567"
+
     # Redis
     REDIS_URL: Optional[str] = None
 

@@ -93,6 +93,23 @@ export default function DashboardPage() {
         </CardContent>
       </Card>
 
+      <Card className="mt-6">
+        <CardHeader>
+          <CardTitle>Your Entries</CardTitle>
+          <CardDescription>
+            View all your submitted entries and their verification status
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Link href="/dashboard/entries">
+            <Button variant="outline" className="w-full sm:w-auto">
+              <ImageIcon className="mr-2 h-4 w-4" />
+              View My Entries ({user?.entry_count || 0})
+            </Button>
+          </Link>
+        </CardContent>
+      </Card>
+
       <div className="mt-8">
         <Card>
           <CardHeader>
