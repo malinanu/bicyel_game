@@ -31,7 +31,7 @@ class OtpService:
         """Generate 6-digit OTP"""
         return str(secrets.randbelow(1000000)).zfill(6)
 
-    def send_otp(self, phone_number: str) -> dict:
+    def send_otp(self, phone_number: str, name: str = None, date_of_birth = None) -> dict:
         """Send OTP via Text.lk"""
         # Validate phone number
         if not self.is_valid_sri_lankan_number(phone_number):
@@ -52,6 +52,8 @@ class OtpService:
         otp_record = OtpVerification(
             phone_number=phone_number,
             otp_code=otp_code,
+            name=name,
+            date_of_birth=date_of_birth,
             expires_at=expires_at,
             verified=False,
             attempts=0

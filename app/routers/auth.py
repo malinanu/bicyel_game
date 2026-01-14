@@ -8,6 +8,7 @@ from app.services.auth_service import AuthService
 from app.utils.dependencies import get_current_user
 from app.models.user import User
 from app.models.entry import Entry
+from app.models.otp import OtpVerification
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
 
@@ -18,7 +19,7 @@ async def request_otp(
 ):
     """Request OTP for login"""
     otp_service = get_otp_service(db)
-    result = otp_service.send_otp(request.phone_number)
+    result = otp_service.send_otp(request.phone_number, request.name, request.date_of_birth)
 
     if not result["success"]:
         raise HTTPException(
@@ -46,12 +47,18 @@ async def verify_otp(
             detail=result["message"]
         )
 
-    # Get or create user
-    # Note: Name should be stored in session from request-otp
-    # For simplicity, using phone as name if not provided
+    # Get OTP record to retrieve stored name and DOB
+    cleaned_phone = otp_service.clean_phone_number(request.phone_number)
+    otp_record = db.query(OtpVerification).filter(
+        OtpVerification.phone_number == cleaned_phone,
+        OtpVerification.verified == True
+    ).order_by(OtpVerification.created_at.desc()).first()
+
+    # Get or create user with name and DOB from OTP record
     user = auth_service.get_or_create_user(
-        name="User",  # Should come from session
-        phone_number=request.phone_number
+        name=otp_record.name if otp_record and otp_record.name else "User",
+        phone_number=request.phone_number,
+        date_of_birth=otp_record.date_of_birth if otp_record else None
     )
 
     # Create access token

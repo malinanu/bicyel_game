@@ -18,7 +18,7 @@ class MockOtpService(OtpService):
         super().__init__(db)
         logger.info("🔧 MockOtpService initialized - OTP codes will print to console")
 
-    def send_otp(self, phone_number: str) -> dict:
+    def send_otp(self, phone_number: str, name: str = None, date_of_birth = None) -> dict:
         """Send OTP - prints to console instead of SMS"""
         # Validate phone number
         if not self.is_valid_sri_lankan_number(phone_number):
@@ -39,6 +39,8 @@ class MockOtpService(OtpService):
         otp_record = OtpVerification(
             phone_number=phone_number,
             otp_code=otp_code,
+            name=name,
+            date_of_birth=date_of_birth,
             expires_at=expires_at,
             verified=False,
             attempts=0
@@ -50,14 +52,18 @@ class MockOtpService(OtpService):
         print("\n" + "=" * 60)
         print("🔧 DEV MODE: OTP Code Generated")
         print("=" * 60)
+        if name:
+            print(f"Name: {name}")
         print(f"Phone: {phone_number}")
+        if date_of_birth:
+            print(f"DOB: {date_of_birth}")
         print(f"OTP Code: {otp_code}")
         print(f"Expires in: {settings.OTP_EXPIRY_MINUTES} minutes")
         print("=" * 60)
         print("Copy this OTP to verify in the app")
         print("=" * 60 + "\n")
 
-        logger.info(f"🔧 DEV MODE: OTP for {phone_number}: {otp_code}")
+        logger.info(f"🔧 DEV MODE: OTP for {phone_number} ({name}): {otp_code}")
 
         return {
             "success": True,

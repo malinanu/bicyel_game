@@ -1,11 +1,12 @@
 from pydantic import BaseModel, Field, validator
 from typing import Optional
-from datetime import datetime
+from datetime import datetime, date
 import re
 
 class OtpRequest(BaseModel):
     name: str = Field(..., min_length=2, max_length=255)
     phone_number: str = Field(..., min_length=10, max_length=15)
+    date_of_birth: Optional[date] = None
 
     @validator('phone_number')
     def validate_phone(cls, v):

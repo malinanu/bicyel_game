@@ -39,7 +39,7 @@ class AuthService:
         except JWTError:
             return None
 
-    def get_or_create_user(self, name: str, phone_number: str) -> User:
+    def get_or_create_user(self, name: str, phone_number: str, date_of_birth=None) -> User:
         """Get existing user or create new one"""
         user = self.db.query(User).filter(
             User.phone_number == phone_number
@@ -49,6 +49,7 @@ class AuthService:
             user = User(
                 name=name,
                 phone_number=phone_number,
+                date_of_birth=date_of_birth,
                 phone_verified_at=datetime.utcnow()
             )
             self.db.add(user)

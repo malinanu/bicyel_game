@@ -29,8 +29,10 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:3000",  # Next.js dev server
         "http://localhost:8000",  # Backend itself
+        "http://localhost:8080",  # Vite frontend (miloscanandwin)
         "http://127.0.0.1:3000",
         "http://127.0.0.1:8000",
+        "http://127.0.0.1:8080",  # Vite frontend (miloscanandwin)
         # Add production URLs here when deploying
     ],
     allow_credentials=True,
